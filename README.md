@@ -29,4 +29,4 @@ composer require forumaker/yandex-smartcaptcha:"*"
 - [**GitHub Repository**](https://github.com/forumaker/yandex-smartcaptcha)
 - [**Packagist**](https://packagist.org/packages/forumaker/yandex-smartcaptcha)
 - [**Extiverse**](https://extiverse.com/extension/forumaker/yandex-smartcaptcha)
-- [**Discuss**](https://discuss.flarum.org/)
+- [**Discuss**](https://discuss.flarum.org/d/39162-yandex-smartcaptcha-for-login-and-registation)
