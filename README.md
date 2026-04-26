@@ -22,6 +22,7 @@ composer require forumaker/yandex-smartcaptcha:"*"
 
 
 ## 📸 Screenshots
+<img width="1300" height="730" alt="image" src="https://github.com/user-attachments/assets/66429b83-af9a-4775-84b6-0aac0f02b49b" />
 
 
 ## 🔗 Links
