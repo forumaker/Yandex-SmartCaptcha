@@ -1,0 +1,26 @@
+forumaker-yandex-smart-captcha:
+  admin:
+    sections:
+      keys: Ключи
+      protection: Защита
+
+    settings:
+      site_key: Ключ клиента
+      site_key_help: Публичный ключ
+
+      server_key: Ключ сервера
+      server_key_help: Секретный ключ
+
+      signup: Показывать на экране регистрации
+      signup_help: Требовать прохождение капчи при создании аккаунта
+
+      signin: Показывать на экране входа
+      signin_help: Требовать прохождение капчи при авторизации
+
+      create_here: "Создайте капчу {link}, чтобы получить ключи"
+      here: "здесь"
+
+  forum:
+    validation:
+      captcha_required: Докажите, что вы не робот
+      captcha_invalid: Докажите, что вы не робот

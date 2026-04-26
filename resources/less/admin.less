@@ -1,0 +1,161 @@
+.YandexSmartCaptchaPage {
+  --ysc-card-radius: 12px;
+  --ysc-transition-speed: 180ms;
+}
+
+@media (max-width: 768px) {
+  .YandexSmartCaptchaPage {
+    padding: 16px 12px;
+  }
+}
+
+.YandexSmartCaptchaPage-content {
+  background: var(--body-bg, #fff);
+  border: 1px solid var(--control-bg, #e5e7eb);
+  border-radius: var(--ysc-card-radius);
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .YandexSmartCaptchaPage-content {
+    padding: 16px;
+  }
+}
+
+.YandexSmartCaptcha-SettingsSection {
+  margin-bottom: 24px;
+  background: color-mix(in srgb, var(--control-bg, #e5e7eb) 25%, transparent);
+  border: 1px solid var(--control-bg, #e5e7eb);
+  border-radius: var(--ysc-card-radius);
+  padding: 20px;
+}
+
+.YandexSmartCaptcha-SettingsSection:last-child {
+  margin-bottom: 0;
+}
+
+.YandexSmartCaptcha-SettingsSection > h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-color, #111827);
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--control-bg, #e5e7eb);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.YandexSmartCaptcha-SettingsSection > h3 i {
+  color: var(--primary-color, #6d28d9);
+  font-size: 18px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--primary-color, #6d28d9) 10%, transparent);
+  border-radius: 6px;
+}
+
+.YandexSmartCaptcha-SettingsSection-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.YandexSmartCaptchaPage .Form-group {
+  margin-bottom: 0;
+}
+
+.YandexSmartCaptchaPage .Form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-color, #111827);
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.YandexSmartCaptchaPage .Form-group .helpText {
+  font-size: 12px;
+  color: var(--muted-color, #6b7280);
+  margin-top: 6px;
+  line-height: 1.5;
+  padding-left: 10px;
+  border-left: 2px solid var(--control-bg, #e5e7eb);
+}
+
+.YandexSmartCaptchaPage input[type='text'],
+.YandexSmartCaptchaPage input[type='number'],
+.YandexSmartCaptchaPage select,
+.YandexSmartCaptchaPage textarea {
+  width: 100%;
+  max-width: 520px;
+  padding: 10px 14px;
+  border: 1px solid var(--control-bg, #e5e7eb);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--body-bg, #fff);
+  transition: border-color var(--ysc-transition-speed) ease;
+}
+
+.YandexSmartCaptchaPage input[type='number'] {
+  max-width: 180px;
+}
+
+.YandexSmartCaptchaPage input[type='text']:focus,
+.YandexSmartCaptchaPage input[type='number']:focus,
+.YandexSmartCaptchaPage select:focus,
+.YandexSmartCaptchaPage textarea:focus {
+  border-color: var(--primary-color, #6d28d9);
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color, #6d28d9) 12%, transparent);
+}
+
+.YandexSmartCaptchaPage .Switch,
+.YandexSmartCaptchaPage .checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: background var(--ysc-transition-speed) ease;
+}
+
+.YandexSmartCaptchaPage .Switch:hover,
+.YandexSmartCaptchaPage .checkbox:hover {
+  background: color-mix(in srgb, var(--control-bg, #e5e7eb) 30%, transparent);
+}
+
+.YandexSmartCaptchaPage .Button--primary.Button--submit {
+  margin-top: 24px;
+}
+
+.YandexSmartCaptchaPage .Button,
+.YandexSmartCaptchaPage a,
+.YandexSmartCaptchaPage button {
+  outline: none;
+}
+
+.YandexSmartCaptchaPage .Button:focus-visible,
+.YandexSmartCaptchaPage a:focus-visible,
+.YandexSmartCaptchaPage button:focus-visible {
+  outline: 2px solid var(--primary-color, #6d28d9);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .YandexSmartCaptchaPage * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.YandexSmartCaptchaPage .helpText a {
+  color: var(--primary-color);
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
