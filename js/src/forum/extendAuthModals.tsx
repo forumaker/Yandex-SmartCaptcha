@@ -58,6 +58,7 @@ export default function extendAuthModalsWithYandexSmartCaptcha() {
             'forumaker-yandex-smart-captcha.forum.validation.captcha_required'
           ),
         };
+        m.redraw();
         return;
       }
 

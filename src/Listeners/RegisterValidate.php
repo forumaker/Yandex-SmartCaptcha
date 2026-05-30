@@ -22,9 +22,6 @@ class RegisterValidate
 
     public function handle(Saving $event): void
     {
-        // Ровно как в Turnstile:
-        // только новая регистрация, только если защита включена,
-        // и не мешаем админу создавать пользователей из админки.
         if (
             !$event->user->exists
             && $this->settings->get('forumaker-yandex-smart-captcha.signup')

@@ -1,6 +1,6 @@
 {
   "name": "forumaker/yandex-smartcaptcha",
-  "description": "Add Yandex SmartCaptcha to the login and registration modals",
+  "description": "Adds Yandex SmartCaptcha to the login and registration modals",
   "type": "flarum-extension",
   "keywords": ["flarum", "flarum-extension", "yandex", "smartcaptcha", "captcha"],
   "license": "MIT",

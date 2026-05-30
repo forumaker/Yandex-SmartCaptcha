@@ -20,6 +20,18 @@ export default class YandexSmartCaptcha extends Component<{ state: any }> {
 
     if (!container || !state?.siteKey) return;
 
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of Array.from(mutation.addedNodes)) {
+          if (node instanceof HTMLIFrameElement) {
+            node.allow = [node.allow, 'accelerometer'].filter(Boolean).join('; ');
+          }
+        }
+      }
+    });
+
+    observer.observe(container, { childList: true, subtree: true });
+
     loadSmartCaptcha()
       .then(() => {
         if (!window.smartCaptcha || state.widgetId !== null) return;
@@ -63,16 +75,13 @@ export default class YandexSmartCaptcha extends Component<{ state: any }> {
   }
 
   detectTheme(): 'dark' | 'light' {
-    // Use Flarum's --body-bg CSS variable — most reliable across themes
     const cssVar = getComputedStyle(document.documentElement)
       .getPropertyValue('--body-bg').trim();
 
     if (cssVar) {
-      // hsl/hsla
       const hsl = cssVar.match(/hsla?\(\s*[\d.]+,\s*[\d.]+%,\s*([\d.]+)%/);
       if (hsl) return parseFloat(hsl[1]) < 50 ? 'dark' : 'light';
 
-      // hex (#fff or #ffffff)
       if (cssVar.startsWith('#')) {
         const hex = cssVar.length === 4
           ? `#${cssVar[1]}${cssVar[1]}${cssVar[2]}${cssVar[2]}${cssVar[3]}${cssVar[3]}`
@@ -87,7 +96,6 @@ export default class YandexSmartCaptcha extends Component<{ state: any }> {
         }
       }
 
-      // rgb/rgba
       const rgb = cssVar.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
       if (rgb) {
         const [, r, g, b] = rgb.map(Number);

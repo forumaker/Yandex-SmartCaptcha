@@ -25,11 +25,13 @@ class AddValidatorRule
         $validator->addExtension(
             'smartcaptcha',
             function ($attribute, $value) use ($secret) {
-                if (!is_string($value) || !is_string($secret) || $secret === '') {
+                if (!is_string($value) || $value === '' || !is_string($secret) || $secret === '') {
                     return false;
                 }
 
-                return !empty($value) && (new SmartCaptcha($secret))->verify($value);
+                $ip = $_SERVER['REMOTE_ADDR'] ?? null;
+
+                return (new SmartCaptcha($secret))->verify($value, $ip);
             }
         );
 

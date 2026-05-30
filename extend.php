@@ -2,14 +2,23 @@
 
 namespace forumaker\YandexSmartCaptcha;
 
+use Flarum\Api\Resource\UserResource;
 use Flarum\Extend;
 use Flarum\Forum\LogInValidator;
 use Flarum\User\Event\Saving as UserSaving;
+use forumaker\YandexSmartCaptcha\Api\SmartCaptchaFields;
 use forumaker\YandexSmartCaptcha\Listeners\AddValidatorRule;
 use forumaker\YandexSmartCaptcha\Listeners\RegisterValidate;
+use forumaker\YandexSmartCaptcha\Middleware\CaptchaPermissionsPolicy;
 use forumaker\YandexSmartCaptcha\Validator\SmartCaptchaValidator;
 
 return [
+    (new Extend\Middleware('forum'))
+        ->add(CaptchaPermissionsPolicy::class),
+
+    (new Extend\Middleware('api'))
+        ->add(CaptchaPermissionsPolicy::class),
+
     (new Extend\Frontend('forum'))
         ->js(__DIR__ . '/js/dist/forum.js')
         ->css(__DIR__ . '/resources/less/forum.less'),
@@ -39,6 +48,9 @@ return [
             'forumaker-yandex-smart-captcha.signin',
             'boolval'
         ),
+
+    (new Extend\ApiResource(UserResource::class))
+        ->fields(SmartCaptchaFields::class),
 
     (new Extend\Validator(SmartCaptchaValidator::class))
         ->configure(AddValidatorRule::class),
