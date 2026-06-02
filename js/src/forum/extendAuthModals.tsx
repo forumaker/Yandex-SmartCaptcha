@@ -31,7 +31,6 @@ export default function extendAuthModalsWithYandexSmartCaptcha() {
       if (!isEnabled(type) || !this.yandexSmartCaptcha) return;
 
       data['smart-token'] = this.yandexSmartCaptcha.token || '';
-      data['smart-action'] = type;
     });
 
     extend(modulePath, 'fields', function (items) {

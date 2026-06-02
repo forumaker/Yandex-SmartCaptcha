@@ -2,17 +2,15 @@
 
 namespace forumaker\YandexSmartCaptcha\SmartCaptcha;
 
+use Flarum\Settings\SettingsRepositoryInterface;
 use GuzzleHttp\Client;
 
 class SmartCaptcha
 {
-    protected string $secretKey;
     protected Client $client;
 
-    public function __construct(string $secretKey)
+    public function __construct(protected SettingsRepositoryInterface $settings)
     {
-        $this->secretKey = $secretKey;
-
         $this->client = new Client([
             'base_uri' => 'https://smartcaptcha.cloud.yandex.ru/',
         ]);
@@ -20,9 +18,15 @@ class SmartCaptcha
 
     public function verify(string $token, ?string $ip = null): bool
     {
+        $secretKey = $this->settings->get('forumaker-yandex-smart-captcha.server_key');
+
+        if (!is_string($secretKey) || $secretKey === '') {
+            return false;
+        }
+
         try {
             $params = [
-                'secret' => $this->secretKey,
+                'secret' => $secretKey,
                 'token'  => $token,
             ];
 
@@ -31,9 +35,9 @@ class SmartCaptcha
             }
 
             $response = $this->client->request('POST', 'validate', [
-                'form_params' => $params,
-                'http_errors' => false,
-                'timeout' => 10,
+                'form_params'     => $params,
+                'http_errors'     => false,
+                'timeout'         => 10,
                 'connect_timeout' => 5,
             ]);
 
@@ -45,7 +49,7 @@ class SmartCaptcha
 
             return ($data['status'] ?? null) === 'ok';
         } catch (\Throwable $e) {
-            return true;
+            return false;
         }
     }
 }

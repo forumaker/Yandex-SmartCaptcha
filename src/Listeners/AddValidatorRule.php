@@ -11,27 +11,26 @@ use Illuminate\Validation\Validator;
 
 class AddValidatorRule
 {
-    protected SettingsRepositoryInterface $settings;
-
-    public function __construct(SettingsRepositoryInterface $settings)
-    {
-        $this->settings = $settings;
+    public function __construct(
+        protected SettingsRepositoryInterface $settings,
+        protected SmartCaptcha $captcha
+    ) {
     }
 
     public function __invoke(AbstractValidator $flarumValidator, Validator $validator): void
     {
-        $secret = $this->settings->get('forumaker-yandex-smart-captcha.server_key');
-
         $validator->addExtension(
             'smartcaptcha',
-            function ($attribute, $value) use ($secret) {
-                if (!is_string($value) || $value === '' || !is_string($secret) || $secret === '') {
+            function ($attribute, $value) {
+                if (!is_string($value) || $value === '') {
                     return false;
                 }
 
-                $ip = $_SERVER['REMOTE_ADDR'] ?? null;
+                $ip = app()->bound('forumaker.captcha.ip')
+                    ? app('forumaker.captcha.ip')
+                    : null;
 
-                return (new SmartCaptcha($secret))->verify($value, $ip);
+                return $this->captcha->verify($value, $ip);
             }
         );
 

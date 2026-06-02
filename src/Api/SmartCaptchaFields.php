@@ -13,10 +13,6 @@ class SmartCaptchaFields
                 ->writableOnCreate()
                 ->nullable()
                 ->set(fn () => null),
-            Schema\Str::make('smart-action')
-                ->writableOnCreate()
-                ->nullable()
-                ->set(fn () => null),
         ];
     }
 }
