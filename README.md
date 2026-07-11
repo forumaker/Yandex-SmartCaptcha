@@ -1,6 +1,8 @@
 # 🛡️ Yandex SmartCaptcha for Flarum
 Adds a [Captcha](https://cloud.yandex.ru/services/smartcaptcha) to the login and registration modals. Supports **Flarum 2.x**
 
+![License](https://img.shields.io/badge/license-MIT-blue) ![Packagist Version](https://img.shields.io/packagist/v/forumaker/yandex-smartcaptcha) ![Downloads](https://img.shields.io/packagist/dt/forumaker/yandex-smartcaptcha)
+
 
 ## 🚀 Features
 - ✅ Captcha on login and/or registration — configurable separately
