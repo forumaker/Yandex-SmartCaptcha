@@ -7,13 +7,15 @@ use Flarum\Foundation\AbstractValidator;
 use Flarum\Settings\SettingsRepositoryInterface;
 use forumaker\YandexSmartCaptcha\SmartCaptcha\SmartCaptcha;
 use forumaker\YandexSmartCaptcha\Validator\SmartCaptchaValidator;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Validation\Validator;
 
 class AddValidatorRule
 {
     public function __construct(
         protected SettingsRepositoryInterface $settings,
-        protected SmartCaptcha $captcha
+        protected SmartCaptcha $captcha,
+        protected Container $container
     ) {
     }
 
@@ -26,8 +28,8 @@ class AddValidatorRule
                     return false;
                 }
 
-                $ip = app()->bound('forumaker.captcha.ip')
-                    ? app('forumaker.captcha.ip')
+                $ip = $this->container->bound('forumaker.captcha.ip')
+                    ? $this->container->make('forumaker.captcha.ip')
                     : null;
 
                 return $this->captcha->verify($value, $ip);

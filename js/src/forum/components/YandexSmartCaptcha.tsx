@@ -1,16 +1,6 @@
 import Component from 'flarum/common/Component';
 import loadSmartCaptcha from '../utils/loadSmartCaptcha';
 
-declare global {
-  interface Window {
-    smartCaptcha?: {
-      render: (container: HTMLElement, options: Record<string, unknown>) => number | string;
-      destroy: (widgetId: number | string) => void;
-      reset: (widgetId: number | string) => void;
-    };
-  }
-}
-
 export default class YandexSmartCaptcha extends Component<{ state: any }> {
   oncreate(vnode) {
     super.oncreate(vnode);
