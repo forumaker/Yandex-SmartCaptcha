@@ -25,8 +25,8 @@
     }
   ],
   "require": {
-    "php": "^8.2",
-    "flarum/core": "^2.0",
+    "php": "^8.3",
+    "flarum/core": "^2.0.0",
     "guzzlehttp/guzzle": "^7.0"
   },
   "autoload": {
@@ -52,7 +52,7 @@
     "sort-packages": true
   },
   "require-dev": {
-    "flarum/testing": "^2.0"
+    "flarum/testing": "^2.0.0"
   },
   "autoload-dev": {
     "psr-4": {
@@ -67,7 +67,5 @@
     "test:unit": "phpunit -c tests/phpunit.unit.xml",
     "test:integration": "phpunit -c tests/phpunit.integration.xml",
     "test:setup": "@php tests/integration/setup.php"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
