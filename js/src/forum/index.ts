@@ -11,12 +11,11 @@ app.initializers.add('forumaker-yandex-smart-captcha', () => {
   // its attributes here throws. `mount` fires once, after boot has finished
   // and forum data is available, which is the earliest safe place to check
   // settings and kick off the preload.
-  extend(Application.prototype, 'mount', () => {
+  extend(Application.prototype as any, 'mount', () => {
     if (!app.forum) return;
 
     const isEnabled =
-      !!app.forum.attribute('forumaker-yandex-smart-captcha.signin') ||
-      !!app.forum.attribute('forumaker-yandex-smart-captcha.signup');
+      !!app.forum.attribute('forumaker-yandex-smart-captcha.signin') || !!app.forum.attribute('forumaker-yandex-smart-captcha.signup');
     const siteKey = app.forum.attribute<string>('forumaker-yandex-smart-captcha.site_key');
 
     if (isEnabled && siteKey) {

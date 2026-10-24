@@ -27,22 +27,13 @@ export default class YandexSmartCaptchaPage extends ExtensionPage {
             // 👇 ТЕКСТ СО ССЫЛКОЙ
             <div className="Form-group">
               <p className="helpText">
-                {app.translator.trans(
-                  'forumaker-yandex-smart-captcha.admin.settings.create_here',
-                  {
-                    link: (
-                      <a
-                        href="https://console.yandex.cloud/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {app.translator.trans(
-                          'forumaker-yandex-smart-captcha.admin.settings.here'
-                        )}
-                      </a>
-                    ),
-                  }
-                )}
+                {app.translator.trans('forumaker-yandex-smart-captcha.admin.settings.create_here', {
+                  link: (
+                    <a href="https://console.yandex.cloud/" target="_blank" rel="noopener noreferrer">
+                      {app.translator.trans('forumaker-yandex-smart-captcha.admin.settings.here')}
+                    </a>
+                  ),
+                })}
               </p>
             </div>,
 

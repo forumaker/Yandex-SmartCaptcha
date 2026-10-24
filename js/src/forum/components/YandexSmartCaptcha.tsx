@@ -1,8 +1,9 @@
 import Component from 'flarum/common/Component';
+import type Mithril from 'mithril';
 import loadSmartCaptcha from '../utils/loadSmartCaptcha';
 
 export default class YandexSmartCaptcha extends Component<{ state: any }> {
-  oncreate(vnode) {
+  oncreate(vnode: Mithril.VnodeDOM<{ state: any }, this>) {
     super.oncreate(vnode);
 
     const state = this.attrs.state;
@@ -49,8 +50,8 @@ export default class YandexSmartCaptcha extends Component<{ state: any }> {
       });
   }
 
-  onremove() {
-    super.onremove();
+  onremove(vnode: Mithril.VnodeDOM<{ state: any }, this>) {
+    super.onremove(vnode);
 
     const state = this.attrs.state;
 
@@ -65,17 +66,14 @@ export default class YandexSmartCaptcha extends Component<{ state: any }> {
   }
 
   detectTheme(): 'dark' | 'light' {
-    const cssVar = getComputedStyle(document.documentElement)
-      .getPropertyValue('--body-bg').trim();
+    const cssVar = getComputedStyle(document.documentElement).getPropertyValue('--body-bg').trim();
 
     if (cssVar) {
       const hsl = cssVar.match(/hsla?\(\s*[\d.]+,\s*[\d.]+%,\s*([\d.]+)%/);
       if (hsl) return parseFloat(hsl[1]) < 50 ? 'dark' : 'light';
 
       if (cssVar.startsWith('#')) {
-        const hex = cssVar.length === 4
-          ? `#${cssVar[1]}${cssVar[1]}${cssVar[2]}${cssVar[2]}${cssVar[3]}${cssVar[3]}`
-          : cssVar;
+        const hex = cssVar.length === 4 ? `#${cssVar[1]}${cssVar[1]}${cssVar[2]}${cssVar[2]}${cssVar[3]}${cssVar[3]}` : cssVar;
         if (hex.length >= 7) {
           const r = parseInt(hex.slice(1, 3), 16);
           const g = parseInt(hex.slice(3, 5), 16);

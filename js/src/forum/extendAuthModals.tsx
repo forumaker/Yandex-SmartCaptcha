@@ -3,17 +3,11 @@ import app from 'flarum/forum/app';
 import YandexSmartCaptcha from './components/YandexSmartCaptcha';
 
 export default function extendAuthModalsWithYandexSmartCaptcha() {
-  const isEnabled = (type: 'signin' | 'signup') =>
-    !!app.forum.attribute(`forumaker-yandex-smart-captcha.${type}`);
+  const isEnabled = (type: 'signin' | 'signup') => !!app.forum.attribute(`forumaker-yandex-smart-captcha.${type}`);
 
-  const getSiteKey = () =>
-    app.forum.attribute<string>('forumaker-yandex-smart-captcha.site_key');
+  const getSiteKey = () => app.forum.attribute<string>('forumaker-yandex-smart-captcha.site_key');
 
-  const applyExtenders = (
-    modulePath: string,
-    type: 'signin' | 'signup',
-    dataMethod: 'loginParams' | 'submitData'
-  ) => {
+  const applyExtenders = (modulePath: string, type: 'signin' | 'signup', dataMethod: 'loginParams' | 'submitData') => {
     extend(modulePath, 'oninit', function () {
       if (!isEnabled(type)) return;
 
@@ -36,14 +30,10 @@ export default function extendAuthModalsWithYandexSmartCaptcha() {
     extend(modulePath, 'fields', function (items) {
       if (!isEnabled(type) || !this.yandexSmartCaptcha?.siteKey) return;
 
-      items.add(
-        'yandex-smart-captcha',
-        <YandexSmartCaptcha state={this.yandexSmartCaptcha} />,
-        -5
-      );
+      items.add('yandex-smart-captcha', <YandexSmartCaptcha state={this.yandexSmartCaptcha} />, -5);
     });
 
-    override(modulePath, 'onsubmit', function (original, e: Event) {
+    override(modulePath, 'onsubmit', function (this: any, original: any, e: any) {
       if (!isEnabled(type) || !this.yandexSmartCaptcha) {
         return original(e);
       }
@@ -53,9 +43,7 @@ export default function extendAuthModalsWithYandexSmartCaptcha() {
         this.loading = false;
         this.alertAttrs = {
           type: 'error',
-          content: app.translator.trans(
-            'forumaker-yandex-smart-captcha.forum.validation.captcha_required'
-          ),
+          content: app.translator.trans('forumaker-yandex-smart-captcha.forum.validation.captcha_required'),
         };
         m.redraw();
         return;
@@ -64,7 +52,7 @@ export default function extendAuthModalsWithYandexSmartCaptcha() {
       return original(e);
     });
 
-    extend(modulePath, 'onerror', function (_, error) {
+    extend(modulePath, 'onerror', function (this: any, _: any, error: any) {
       if (!isEnabled(type) || !this.yandexSmartCaptcha) return;
 
       if (this.yandexSmartCaptcha.widgetId !== null && window.smartCaptcha) {
@@ -74,9 +62,7 @@ export default function extendAuthModalsWithYandexSmartCaptcha() {
       this.yandexSmartCaptcha.token = null;
 
       if (error.alert && !error.alert.content?.length) {
-        error.alert.content = app.translator.trans(
-          'forumaker-yandex-smart-captcha.forum.validation.captcha_invalid'
-        );
+        error.alert.content = app.translator.trans('forumaker-yandex-smart-captcha.forum.validation.captcha_invalid');
       }
     });
   };
